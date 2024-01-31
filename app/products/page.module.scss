@@ -1,4 +1,41 @@
 .container {
-    background-color: white;
+  margin-block: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .productList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    & > a {
+      text-decoration: none;
+    }
+  }
+
+  .paginationButtons {
     display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .paginationButtons button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    margin: 0 4px;
+    cursor: pointer;
+  }
+
+  .paginationButtons button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .paginationButtons button.selected {
+    border-radius: 50%;
+    border: 2px solid #333;
+    font-weight: bold;
+    color: #333;
+  }
 }

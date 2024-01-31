@@ -1,9 +1,11 @@
+"use client";
 import React, { createContext, useContext, ReactNode } from "react";
-import { getAllProducts, createProduct } from "./api";
+import { getAllProducts, createProduct, getOneProduct } from "./api";
 
 interface ProductContextProps {
-  getAllProducts: () => Promise<any[]>;
+  getAllProducts: (page: number) => Promise<ApiProductsResponse>;
   createProduct: (productData: any) => Promise<any>;
+  getOneProduct: (id: number) => Promise<Product>;
 }
 
 const ProductContext = createContext<ProductContextProps | undefined>(
@@ -18,6 +20,7 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         getAllProducts,
         createProduct,
+        getOneProduct,
       }}
     >
       {children}
@@ -27,6 +30,7 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
 
 export const useProductApi = () => {
   const context = useContext(ProductContext);
+  console.log(context);
   if (!context) {
     throw new Error("useProductApi must be used within an ProductProvider");
   }

@@ -5,7 +5,9 @@ const NavBarComponent: React.FC = () => {
   return (
     <nav className={styles.nav}>
       <ul>
-        <li className={styles.logoText}>Vedo</li>
+        <li className={styles.logoText}>
+          <NextLink href="/">Vedo</NextLink>
+        </li>
         <li>
           <NextLink href="/products">Products</NextLink>
         </li>

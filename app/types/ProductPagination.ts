@@ -11,8 +11,10 @@ interface Variant {
 interface Product {
   id: number;
   name: string;
-  description: string;
-  variants: Variant[];
+  description?: string;
+  variants?: Variant[];
+  created_at: string;
+  updated_at: string;
 }
 
 interface Link {
@@ -32,7 +34,7 @@ interface Meta {
   total: number;
 }
 
-interface ApiResponse {
+interface ApiProductsResponse {
   data: Product[];
   links: {
     first: string;

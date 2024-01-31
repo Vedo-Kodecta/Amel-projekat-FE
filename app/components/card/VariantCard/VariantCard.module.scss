@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  height: 100px;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 15px;
+  justify-content: space-between;
+
+  .leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1,
+    p {
+      margin: 0;
+    }
+    p {
+      text-decoration: underline;
+    }
+  }
+  .rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    .priceAndId {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      h1,
+      p {
+        margin: 0;
+      }
+      p {
+        font-size: 14px;
+        color: #666;
+      }
+    }
+    .button {
+      button {
+        background-color: #cc0000;
+        color: #fff;
+        font-weight: 600;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    }
+  }
+}

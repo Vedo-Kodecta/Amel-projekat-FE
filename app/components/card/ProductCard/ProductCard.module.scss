@@ -1,0 +1,47 @@
+.cardWrapper {
+  .container {
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    height: 150px;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+
+    .image {
+      display: flex;
+      height: 100%;
+      min-width: 150px;
+      background-color: gray;
+      color: white;
+      border-radius: 15px;
+      justify-content: center;
+      align-items: center;
+    }
+    .textContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+      h3,
+      p {
+        margin: 0px;
+      }
+      .textDesc {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        p {
+          font-size: 12px;
+          max-height: 2.3em;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
