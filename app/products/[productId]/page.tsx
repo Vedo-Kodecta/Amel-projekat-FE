@@ -26,8 +26,18 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
     <div className={styles.productDetail}>
       {product && (
         <>
-          <h1>{product?.name}</h1>
-          <p className={styles.description}>{product.description}</p>
+          <div className={styles.titleDescButton}>
+            <div className={styles.titleDesc}>
+              <h1>{product?.name}</h1>
+              <p className={styles.description}>{product.description}</p>
+            </div>
+            <div className={styles.buttons}>
+              {/* TODO POKAZI DUGMICE U ZAVISNOSTI OD ROLE I DOSTUPNIH AKCIJA */}
+              <button className={styles.activate}>Activate</button>
+              <button className={styles.addVariant}>Add Variant</button>
+              <button className={styles.delete}>Delete</button>
+            </div>
+          </div>
           {product?.variants && product?.variants?.length > 0 && (
             <div className={styles.variants}>
               <h3>Product Variants:</h3>
