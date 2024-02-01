@@ -4,25 +4,27 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import VariantCard from "@/app/components/card/VariantCard/VariantCard";
 import { useStateMachineApi } from "@/app/context/StateMachine/StateMachineContext";
+import AddVariantModal from "@/app/components/modal/product/AddVariantModal";
 
 const ProductDetailPage: React.FC<DynamicParams> = (params) => {
   const { getOneProduct } = useProductApi();
-  const { getAvailableFunctions, addVariant, deleteState, activate } =
-    useStateMachineApi();
+  const {
+    getAvailableFunctions,
+    addVariant,
+    deleteState,
+    activate,
+    removeVariant,
+  } = useStateMachineApi();
   const [product, setProduct] = useState<Product>();
   const [availableFunctions, setAvailableFunctions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAddVariantModalOpen, setIsAddVariantModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
         const product = await getOneProduct(params.params.productId);
         setProduct(product);
-
-        const functions = await getAvailableFunctions(params.params.productId);
-        setAvailableFunctions(functions);
-        setLoading(false);
       } catch (error) {
         setLoading(true);
         console.error("Error fetching products:", error);
@@ -30,7 +32,23 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
     };
 
     fetchData();
-  }, []);
+  }, [isAddVariantModalOpen]);
+
+  useEffect(() => {
+    const fetchFunctions = async () => {
+      try {
+        const functions = await getAvailableFunctions(params.params.productId);
+        setAvailableFunctions(functions);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching available functions:", error);
+      }
+    };
+
+    if (product?.variants) {
+      fetchFunctions();
+    }
+  }, [params.params.productId, product?.variants]);
 
   const handleActivate = async () => {
     try {
@@ -47,6 +65,31 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
       await deleteState(params.params.productId);
       const functions = await getAvailableFunctions(params.params.productId);
       setAvailableFunctions(functions);
+    } catch (error) {
+      console.error("Error activating product:", error);
+    }
+  };
+
+  const handleAddVariant = () => {
+    setIsAddVariantModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsAddVariantModalOpen(false);
+  };
+
+  const removeVariantFunction = async (variantId: number) => {
+    try {
+      await removeVariant(params.params.productId, variantId);
+      if (product) {
+        const updatedVariants = product.variants?.filter(
+          (variant) => variant.id !== variantId
+        );
+        setProduct({
+          ...product,
+          variants: updatedVariants,
+        });
+      }
     } catch (error) {
       console.error("Error activating product:", error);
     }
@@ -72,6 +115,7 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
                         if (action === "activate") {
                           handleActivate();
                         } else if (action === "addVariant") {
+                          handleAddVariant();
                         } else if (action === "delete") {
                           handleDelete();
                         }
@@ -92,6 +136,8 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
                     key={variant.id}
                     variant={variant}
                     availableFunctions={availableFunctions}
+                    productId={params.params.productId}
+                    removeVariantFunction={removeVariantFunction}
                   />
                 ))}
               </div>
@@ -100,6 +146,13 @@ const ProductDetailPage: React.FC<DynamicParams> = (params) => {
         </>
       ) : (
         <h1>Henlo sačekaj pašice</h1>
+      )}
+      {isAddVariantModalOpen && (
+        <AddVariantModal
+          productId={params.params.productId}
+          handleCloseModal={handleCloseModal}
+          addVariant={addVariant}
+        />
       )}
     </div>
   );

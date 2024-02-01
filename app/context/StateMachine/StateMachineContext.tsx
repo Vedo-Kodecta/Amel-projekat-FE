@@ -12,7 +12,7 @@ interface StateMachineProps {
   getAvailableFunctions: (productId: number) => Promise<any>;
   deleteState: (productId: number) => Promise<any>;
   removeVariant: (productId: number, variantId: number) => Promise<any>;
-  addVariant: (productId: number) => Promise<any>;
+  addVariant: (productId: number, variant: AddVariant) => Promise<any>;
   activate: (productId: number) => Promise<any>;
 }
 

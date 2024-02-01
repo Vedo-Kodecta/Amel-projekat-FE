@@ -3,7 +3,9 @@ import styles from "./VariantCard.module.scss";
 const VariantCard: React.FC<{
   variant: Variant;
   availableFunctions: string[];
-}> = ({ variant, availableFunctions }) => {
+  productId: number;
+  removeVariantFunction: (variantId: number) => Promise<void>;
+}> = ({ variant, availableFunctions, productId, removeVariantFunction }) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -17,7 +19,13 @@ const VariantCard: React.FC<{
         </div>
         <div className={styles.button}>
           {availableFunctions?.includes("removeVariant") && (
-            <button>Remove</button>
+            <button
+              onClick={() => {
+                removeVariantFunction(variant.id);
+              }}
+            >
+              Remove
+            </button>
           )}
         </div>
       </div>

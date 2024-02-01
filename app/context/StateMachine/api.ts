@@ -29,6 +29,7 @@ export const deleteState = async (id: number) => {
 export const removeVariant = async (productId: number, variantId: number) => {
   const response = await api.put(
     productId + "/state-machine/remove-variant/" + variantId,
+    {},
     {
       headers,
     }
@@ -36,9 +37,8 @@ export const removeVariant = async (productId: number, variantId: number) => {
   return response.data;
 };
 
-//DODAJ BODY
-export const addVariant = async (id: number) => {
-  const response = await api.put(id + "/state-machine/add-variant", {
+export const addVariant = async (id: number, variant: AddVariant) => {
+  const response = await api.put(id + "/state-machine/add-variant", variant, {
     headers,
   });
   return response.data;
