@@ -8,8 +8,11 @@ const headers = {
   Authorization: `Bearer ${localStorage.getItem("bearerToken")}`,
 };
 
-export const getAllProducts = async (page: number = 1) => {
-  const response = await api.get("/product?include=variants", {
+export const getAllProducts = async (
+  page: number = 1,
+  query: string | undefined
+) => {
+  const response = await api.get("/product?include=variants&" + query, {
     params: { page },
   });
   return response.data;

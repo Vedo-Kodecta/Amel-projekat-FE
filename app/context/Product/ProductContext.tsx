@@ -3,7 +3,10 @@ import React, { createContext, useContext, ReactNode } from "react";
 import { getAllProducts, createProduct, getOneProduct } from "./api";
 
 interface ProductContextProps {
-  getAllProducts: (page: number) => Promise<ApiProductsResponse>;
+  getAllProducts: (
+    page: number,
+    query: string | undefined
+  ) => Promise<ApiProductsResponse>;
   createProduct: (productData: any) => Promise<any>;
   getOneProduct: (id: number) => Promise<Product>;
 }
