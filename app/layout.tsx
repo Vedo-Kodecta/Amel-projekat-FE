@@ -8,6 +8,7 @@ import styles from "./layout.module.scss";
 import { UserProvider } from "./context/User/UserContext";
 import { useEffect } from "react";
 import { setBearerToken } from "./context/User/api";
+import { StateMachineProvider } from "./context/StateMachine/StateMachineContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,12 +25,14 @@ export default function RootLayout({
   return (
     <UserProvider>
       <ProductProvider>
-        <html lang="en">
-          <body className={styles.container}>
-            <NavBarComponent />
-            {children}
-          </body>
-        </html>
+        <StateMachineProvider>
+          <html lang="en">
+            <body className={styles.container}>
+              <NavBarComponent />
+              {children}
+            </body>
+          </html>
+        </StateMachineProvider>
       </ProductProvider>
     </UserProvider>
   );

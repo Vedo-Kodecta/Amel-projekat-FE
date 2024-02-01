@@ -30,7 +30,6 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({
 
 export const useProductApi = () => {
   const context = useContext(ProductContext);
-  console.log(context);
   if (!context) {
     throw new Error("useProductApi must be used within an ProductProvider");
   }

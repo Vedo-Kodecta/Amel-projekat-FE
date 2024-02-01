@@ -1,6 +1,9 @@
 import styles from "./VariantCard.module.scss";
 
-const VariantCard: React.FC<{ variant: Variant }> = ({ variant }) => {
+const VariantCard: React.FC<{
+  variant: Variant;
+  availableFunctions: string[];
+}> = ({ variant, availableFunctions }) => {
   return (
     <div className={styles.container}>
       <div className={styles.leftSide}>
@@ -12,9 +15,10 @@ const VariantCard: React.FC<{ variant: Variant }> = ({ variant }) => {
           <h1>Price: {variant.price}$</h1>
           <p>Variant Id: {variant.id}</p>
         </div>
-        {/* TODO STAVI DA SAMO MOZE ADMIN */}
         <div className={styles.button}>
-          <button>Remove</button>
+          {availableFunctions?.includes("removeVariant") && (
+            <button>Remove</button>
+          )}
         </div>
       </div>
     </div>

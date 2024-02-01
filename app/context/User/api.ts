@@ -6,7 +6,7 @@ interface LoginResponse {
 
 const api: AxiosInstance = axios.create({
   baseURL: "http://localhost:8000/",
-  withCredentials: true, // Enable sending cookies along with the request
+  withCredentials: true,
 });
 
 export const setBearerToken = (token: string | null): void => {
@@ -24,8 +24,6 @@ export const login = async (
   password: string
 ): Promise<{ success: boolean; token?: string; error?: string }> => {
   try {
-    console.log("usao u login");
-
     const csrfResponse = await api.get("/sanctum/csrf-cookie", {
       withCredentials: true,
     });

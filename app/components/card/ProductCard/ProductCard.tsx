@@ -7,11 +7,11 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const variants = product.variants;
-  let minPrice = 0;
-  let maxPrice = 0;
-  // Find the smallest and largest prices
-  if (variants) {
+  const variants = product.variants ?? [];
+  let minPrice = null;
+  let maxPrice = null;
+
+  if (variants.length > 0) {
     minPrice = Math.min(...variants.map((variant) => variant.price));
     maxPrice = Math.max(...variants.map((variant) => variant.price));
   }
@@ -26,9 +26,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
             </div>
-            <p>
-              Price Range: ${minPrice} - ${maxPrice}
-            </p>
+            {minPrice && maxPrice ? (
+              <p>
+                Price Range: ${minPrice} - ${maxPrice}
+              </p>
+            ) : (
+              <p>There are no variants, please add them</p>
+            )}
           </div>
         </div>
       </Link>
