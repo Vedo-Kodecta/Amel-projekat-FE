@@ -14,10 +14,10 @@ const ProductPage: React.FC = () => {
     name: "",
     priceGT: "",
     priceLTE: "",
-    valid_fromGT: "",
-    valid_toLTE: "",
+    valid_from: "",
+    valid_to: "",
   });
-  const [query, setQuery] = useState<string | undefined>();
+  const [query, setQuery] = useState<string | undefined>('');
   const [paramValues, setParamValues] = useState<Record<string, string>>({});
 
   const debouncedFetchData = debounce(async () => {
@@ -118,27 +118,27 @@ const ProductPage: React.FC = () => {
         </div>
         <div className={styles.twinInputs}>
           <div className={styles.filterInput}>
-            <label htmlFor="valid_fromGT" className={styles.label}>
-              Valid From Greater Than:
+            <label htmlFor="valid_from" className={styles.label}>
+              Valid From:
             </label>
             <input
               type="date"
-              name="valid_fromGT"
-              placeholder="Valid From Greater Than"
-              value={filters.valid_fromGT}
+              name="valid_from"
+              placeholder="Valid From"
+              value={filters.valid_from}
               onChange={handleInputChange}
               className={styles.input}
             />
           </div>
           <div className={styles.filterInput}>
-            <label htmlFor="valid_toLTE" className={styles.label}>
-              Valid To Less Than or Equal:
+            <label htmlFor="valid_to" className={styles.label}>
+              Valid To:
             </label>
             <input
               type="date"
-              name="valid_toLTE"
-              placeholder="Valid To Less Than or Equal"
-              value={filters.valid_toLTE}
+              name="valid_to"
+              placeholder="Valid To"
+              value={filters.valid_to}
               onChange={handleInputChange}
               className={styles.input}
             />

@@ -12,14 +12,14 @@ export const getAllProducts = async (
   page: number = 1,
   query: string | undefined
 ) => {
-  const response = await api.get("/product?include=variants&" + query, {
+  const response = await api.get("/product?" + query, {
     params: { page },
   });
   return response.data;
 };
 
 export const getOneProduct = async (id: number) => {
-  const response = await api.get("/product/" + id + "?include=variants");
+  const response = await api.get("/product/" + id + "?includeVariants=true");
   return response.data.data;
 };
 

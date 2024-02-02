@@ -31,7 +31,7 @@ const CreateProductPage: React.FC = () => {
 
     try {
       await createProduct(formData);
-      console.log("Product created successfully");
+      window.location.href = "/products";
     } catch (error) {
       console.error("Error creating product:", error);
     }
